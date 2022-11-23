@@ -1,1 +1,0 @@
-export const abiVentas = "0xea9c492b60675A963EEC89Ab9a3aecc0c325CA5B" 

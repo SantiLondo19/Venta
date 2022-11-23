@@ -1,0 +1,1 @@
+export const abiVentas = "0x2b4Abcb6cE33acdc2F75f57c4eE19277d1FF88ab" 
