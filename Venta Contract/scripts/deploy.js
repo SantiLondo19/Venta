@@ -17,7 +17,7 @@ async function main() {
   console.log("Contract deployed at:", contract.address);
   let config = `export const abiVentas = "${contract.address}" `;
   let data = JSON.stringify(config);
-  fs.writeFileSync("../config.js", JSON.parse(data));
+  fs.writeFileSync("../venta-front/config.js", JSON.parse(data));
 
   fs.copyFile("./artifacts/contracts/Venta.sol/Venta.json", "../Venta.json", (err) => {
     if (err) {

@@ -1,11 +1,15 @@
 import { Button } from "@chakra-ui/react";
 import { useState } from "react";
 import "./producto.css";
+import {
+  usePrepareContractWrite,
+  useContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
 
-
-export const AddProduct = ({submitProduct}) => {
+export const AddProduct = () => {
   const [product, setProduct] = useState({
-    id: "",
+    productId: "",
     seller: "",
     price: "",
     token: "",
@@ -21,14 +25,66 @@ export const AddProduct = ({submitProduct}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setProduct({
-      id: "",
+      productId: "",
       seller: "",
       price: "",
       token: "",
       stock: "",
     });
-    submitProduct(product);
+    write?.();
   };
+
+  const { config } = usePrepareContractWrite({
+    address: "0x21D6a1AFB21D1030EDde3d9ce527055761a18352",
+    abi: [
+      {
+        name: "submitProduct",
+        type: "function",
+        stateMutability: "nonpayable",
+        inputs: [
+          {
+            internalType: "uint256",
+            name: "productId",
+            type: "uint256",
+          },
+          {
+            internalType: "address payable",
+            name: "seller",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "price",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "token",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "stock",
+            type: "uint256",
+          },
+        ],
+        outputs: [],
+      },
+    ],
+    functionName: "submitProduct",
+    args: [
+      parseInt[product.productId],
+      product.seller,
+      parseInt[product.price],
+      product.token,
+      parseInt[product.stock],
+    ],
+  });
+  const { data, write } = useContractWrite(config);
+  const { isLoading, isSuccess } = useWaitForTransaction({
+    hash: data?.hash,
+  })
+
 
   return (
     <div className="contenedor">
@@ -39,9 +95,9 @@ export const AddProduct = ({submitProduct}) => {
             Id:
             <input
               type="text"
-              name="id"
+              name="productId"
               onChange={onChange}
-              value={product.id}
+              value={product.productId}
             />
           </label>
           <label>
