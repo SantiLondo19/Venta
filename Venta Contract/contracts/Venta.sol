@@ -184,7 +184,7 @@ contract Venta is Ownable {
         Product memory product = productMapping[productId];
         require(productId != 0, "Ingrese un id valido");
         require(product.stock >= stockToRemove, "No hay stock suficiente");
-                require(product.seller != address(0), "Producto no existe");
+        require(product.seller != address(0), "Producto no existe");
         product.stock -= stockToRemove;
         productMapping[productId] = product;
         emit StockRemoved(productId, stockToRemove);

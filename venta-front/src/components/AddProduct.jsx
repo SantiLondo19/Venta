@@ -35,7 +35,7 @@ export const AddProduct = () => {
   };
 
   const { config } = usePrepareContractWrite({
-    address: "0x21D6a1AFB21D1030EDde3d9ce527055761a18352",
+    address: "0x21D6a1AFB21D1030EDde3d9ce527055761a18352w",
     abi: [
       {
         name: "submitProduct",
